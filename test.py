@@ -330,6 +330,7 @@ def check_classify():
 
     log(green("PASS"), ex_name, "")
 
+
 def check_classifier_accuracy():
     ex_name = "Classifier accuracy"
 
