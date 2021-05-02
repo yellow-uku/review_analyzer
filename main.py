@@ -103,26 +103,3 @@ print("{:45} {:.4f}".format("Validation accuracy for Pegasos:", avg_peg_val_accu
 # utils.plot_tune_results('Pegasos', 'L', Ls, *peg_tune_results_L)
 #
 
-# -------------------------------------------------------------------------------
-# Use the best method (perceptron, average perceptron or Pegasos) along with
-# the optimal hyperparameters according to validation accuracies to test
-# against the test srcs. The test data has been provided as
-# test_bow_features and test_labels.
-# -------------------------------------------------------------------------------
-
-# Your code here
-
-peg_train_accuracy, peg_test_accuracy = p1.classifier_accuracy(p1.pegasos, train_bow_features, test_bow_features,
-                                                               train_labels, test_labels, T=25, L=0.01)
-print('{} {:.4f}'.format('Testing accuracy for Pegasos algorithm: ', peg_test_accuracy))
-
-# -------------------------------------------------------------------------------
-# Assign to best_theta, the weights (and not the bias!) learned by your most
-# accurate algorithm with the optimal choice of hyperparameters.
-#-------------------------------------------------------------------------------
-
-best_theta = p1.pegasos(test_bow_features, test_labels, 25, 0.01)[0]      # Your code here
-wordlist = [word for (idx, word) in sorted(zip(dictionary.values(), dictionary.keys()))]
-sorted_word_features = utils.most_explanatory_word(best_theta, wordlist)
-print("Most Explanatory Word Features")
-print(sorted_word_features[:10])
