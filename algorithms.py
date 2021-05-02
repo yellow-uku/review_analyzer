@@ -7,7 +7,7 @@ import random
 
 def get_order(n_samples):
     try:
-        with open(str(n_samples) + '.txt') as fp:
+        with open('srcs/' + str(n_samples) + '.txt') as fp:
             line = fp.readline()
             return list(map(int, line.split(',')))
     except FileNotFoundError:
@@ -124,7 +124,8 @@ def classify(feature_matrix, theta, theta_0):
     n = feature_matrix.shape[0]
     labels = np.zeros((n, ), dtype=int)
     for i in range(n):
-        if (np.dot(theta, feature_matrix[i]) + theta_0) > 0:
+        prediction = np.dot(theta, feature_matrix[i]) + theta_0
+        if prediction > 0:
             labels[i] = 1
         else:
             labels[i] = -1
@@ -184,10 +185,8 @@ def extract_bow_feature_vectors(reviews, dictionary):
     Returns the bag-of-words feature matrix representation of the data.
     The returned matrix is of shape (n, m), where n is the number of reviews
     and m the total number of entries in the dictionary.
-
-    Feel free to change this code as guided by Problem 9
     """
-    # Your code here
+
 
     num_reviews = len(reviews)
     feature_matrix = np.zeros([num_reviews, len(dictionary)])
